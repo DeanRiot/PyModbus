@@ -21,5 +21,5 @@ while True:
           break
     frame = bytes(modbus.createStringFrame(modbus.createFrame(modbus.parseFrame(frame))),'ascii')
     TCP.Send(frame,conn)
-    data = TCP.Receive(conn,512)
+    #data = TCP.Receive(conn,512)
 TCP.Close(conn)
