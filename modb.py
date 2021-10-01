@@ -7,9 +7,11 @@ def createFrame(modbFrame):
         data.append(chr(int(sym.encode('ascii'))))
         pdu = pdu + sym
     crcSumm = hex(crc.crc16(bytes(sym, 'ascii')))
-    print(crcSumm)
-    data.append(chr(int(crcSumm[2:3],16)))
-    data.append(chr(int(crcSumm[4:5],16)))
+    print(chr(int(crcSumm[2:3],16)))
+    print(chr(int(crcSumm[4:5],16)))
+    data.append(str(int(crcSumm[2:3],16)))
+    data.append(str(int(crcSumm[4:5],16)))
+    print(data)
     return data
 
 def createStringFrame(byteFrame):

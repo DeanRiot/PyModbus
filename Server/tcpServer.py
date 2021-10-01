@@ -9,7 +9,7 @@ def decodeChar(dataString):
 
 print("Сервер запущен")
 server = socket.socket()
-server.bind(('localhost',3000))
+server.bind(('localhost',4000))
 server.listen(1)
 connect,addr = server.accept()
 print("соединение установелено")
@@ -18,9 +18,12 @@ while True:
     if not data:
         break
     print(data)
-    datastr = ' '
-    for cr in decodeChar(data):
-        datastr = datastr + ' ' + cr
-    print(datastr)
+    print(data[1])
+    inc=0
+    for cr in data:
+        if(inc==0):
+        	inc+=1
+        	continue
+        print(cr)
 server.close()
 
