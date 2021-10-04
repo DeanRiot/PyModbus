@@ -1,5 +1,5 @@
 import socket
-
+PORT = 3000
 def decodeChar(dataString):
     byteArr = []
     for char in dataString:
@@ -7,9 +7,11 @@ def decodeChar(dataString):
         byteArr.append(data)
     return byteArr
 
-print("Сервер запущен")
+h_name = socket.gethostname()
+IP = socket.gethostbyname(h_name)
 server = socket.socket()
-server.bind(('localhost',4000))
+server.bind(('localhost',PORT))
+print("Сервер запущен! Адрес:", IP,"Порт: ",PORT)
 server.listen(1)
 connect,addr = server.accept()
 print("соединение установелено")
@@ -21,9 +23,6 @@ while True:
     print(data[1])
     inc=0
     for cr in data:
-        if(inc==0):
-        	inc+=1
-        	continue
-        print(cr)
+        print(hex(cr))
 server.close()
 

@@ -18,8 +18,9 @@ except:
 while True:
     frame = input()
     if frame == "stop":
-          break
-    frame = bytes(modbus.createStringFrame(modbus.createFrame(modbus.parseFrame(frame))),'ascii')
-    TCP.Send(frame,conn)
+        break
+    frame = modbus.createFrame(modbus.parseHexFrame(frame))
+    dataBytes = bytes(frame)
+    TCP.Send(dataBytes,conn)
     #data = TCP.Receive(conn,512)
 TCP.Close(conn)

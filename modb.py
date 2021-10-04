@@ -4,13 +4,15 @@ def createFrame(modbFrame):
     pdu = ''
     for sym in modbFrame:
         print(sym.encode('ascii'))
-        data.append(chr(int(sym.encode('ascii'))))
-        pdu = pdu + sym
-    crcSumm = hex(crc.crc16(bytes(sym, 'ascii')))
-    print(chr(int(crcSumm[2:3],16)))
-    print(chr(int(crcSumm[4:5],16)))
-    data.append(str(int(crcSumm[2:3],16)))
-    data.append(str(int(crcSumm[4:5],16)))
+        data.append(int(sym.encode('ascii')))
+        pdu = pdu + chr(int(sym))
+        print(pdu)
+    crcSumm = hex(crc.calcString(pdu, 0xFFFF))
+    print(crcSumm)
+    print(crcSumm[4:6])
+    print(crcSumm[2:4])
+    data.append(int(crcSumm[4:6], base =16))
+    data.append(int(crcSumm[2:4], base =16))
     print(data)
     return data
 
@@ -23,7 +25,7 @@ def createStringFrame(byteFrame):
 def decodeChar(dataString):
     byteArr = []
     for char in dataString:
-        data = int(ord(char))
+        data = hex(int(ord(char)))
         byteArr.append(data)
     return byteArr
 
@@ -31,3 +33,9 @@ def parseFrame(stringFrame):
     data = stringFrame.split()
     return data
 
+def parseHexFrame(stringFrame):
+	data = parseFrame(stringFrame)
+	intData = [ ]
+	for cr in data:
+	    intData.append(str(int(cr, base = 16)))
+	return intData	
